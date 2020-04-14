@@ -1,10 +1,12 @@
 <template>
   <div id="app" v-if="loaded">
-    <Map ref="map" :points="points"/>
-    <div>
+    <Map id="ma" ref="map" :points="points"/>
+    <div id="controls">
       <vue-slider 
         v-model="dateSlider" 
+        id="date-slider"
         :max="dateRange-1" 
+        tooltip="always"
         :tooltip-formatter="val => formatTooltip(val)"
       />
       <button @click="animateHeatmap()">
@@ -78,12 +80,26 @@ export default {
 </script>
 
 <style>
+body {
+  margin: 0px;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  width: 100vw;
+  height: 100vh;
+}
+#map {
+  z-index: 0;
+}
+#controls {
+  position: fixed;
+  bottom: 0px;
+  height: 10vh;
+  z-index: 999;
+  width: 100%;
+  background-color: white;
+  padding: 30px;
+}
+#date-slider {
+  width: 80vw !important
 }
 </style>

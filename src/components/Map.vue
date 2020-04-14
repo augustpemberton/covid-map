@@ -18,6 +18,7 @@
         :lat-lng="heatmapPoints"
         :blur="heatmapConfig.blur"
         :radius="heatmapConfig.radius"
+        :min-opacity="0.3"
       />
     </l-map>
   </div>
@@ -63,8 +64,8 @@ export default {
           '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       },
       heatmapConfig: {
-        radius: 25,
-        blur: 15,
+        radius: 40,
+        blur: 23,
       }
     }
   },
@@ -84,10 +85,7 @@ export default {
 
 <style scoped>
   .container {
-    position: absolute;
-    top: 120px;
-    left: 0;
-    bottom: 0;
-    right: 0;
+    height: 100%;
+    margin: 0px 0px 20px 0px;
   }
 </style>

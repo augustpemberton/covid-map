@@ -85,7 +85,7 @@ export default {
 <style scoped>
   .container {
     position: absolute;
-    top: 100px;
+    top: 120px;
     left: 0;
     bottom: 0;
     right: 0;

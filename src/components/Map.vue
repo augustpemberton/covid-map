@@ -3,10 +3,10 @@
     <GmapMap ref="mapRef" 
       :center="{lat: 54, lng: -1}"
       :zoom="7"
+      :fullscreenControl="false"
       map-type-id="terrain"
-      style="width: 1000px; height: 800px"
     />
-    <vue-slider @change="changeDate" :min="1" :value="1" :max="40"/>
+    <vue-slider @change="changeDate" :min="1" :value="dateRange" :max="dateRange" />
   </div>
 </template>
 
@@ -23,7 +23,8 @@ export default {
       points: {},
       maxInfections: 0,
       date: null,
-      heatmapPoints: null
+      heatmapPoints: null,
+      dateRange: 39
     }
   },
   computed: {
@@ -87,17 +88,19 @@ export default {
       Object.keys(data).forEach(date => {
         data[date].forEach(row => {
           var count = self.parseCount(row.cases);
-          if (count > self.maxInfections) {
-            self.maxInfections = count;
-          }
-          if (districts[row.areaCode] === undefined) return {}
+          if (count > 0) {
+            if (count > self.maxInfections) {
+              self.maxInfections = count;
+            }
+            if (districts[row.areaCode] === undefined) return {}
 
-          if (!points[date]) points[date] = [];
-          points[date].push({
-            lat: districts[row.areaCode].lat,
-            lng: districts[row.areaCode].long,
-            count: count
-          })
+            if (!points[date]) points[date] = [];
+            points[date].push({
+              lat: districts[row.areaCode].lat,
+              lng: districts[row.areaCode].long,
+              count: count
+            })
+          }
         })
       })
       this.points = {...points, ...this.points};
@@ -131,6 +134,7 @@ export default {
       }
     },
     changeDate(prevDays) {
+      prevDays = this.dateRange - prevDays;
       var newDate;
       if (prevDays > 0) {
         newDate = moment().subtract(prevDays, 'days').format('YYYY-MM-DD');
@@ -145,4 +149,12 @@ export default {
 </script>
 
 <style scoped>
+  .vue-map-container,
+  .vue-map-conainer .vue-map {
+    position: absolute;
+    top:100px;
+    left:0%;
+    bottom: 100px;
+    right: 0;
+  }
 </style>

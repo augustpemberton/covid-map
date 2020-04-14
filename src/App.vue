@@ -2,7 +2,11 @@
   <div id="app" v-if="loaded">
     <Map ref="map" :points="points"/>
     <div>
-      <vue-slider v-model="dateSlider" :max="dateRange-1" />
+      <vue-slider 
+        v-model="dateSlider" 
+        :max="dateRange-1" 
+        :tooltip-formatter="val => formatTooltip(val)"
+      />
       <button @click="animateHeatmap()">
         <span  v-if="!animation">
           Play animation
@@ -23,6 +27,8 @@ export default {
   name: 'App',
   components: {
     Map
+  },
+  computed: {
   },
   data () {
     return {
@@ -63,6 +69,9 @@ export default {
           }
         }.bind(this), 300);
       }
+    },
+    formatTooltip (value) {
+      return moment().subtract(this.dateRange - value, 'days').format('YYYY-MM-DD');
     }
   }
 }

@@ -18,7 +18,6 @@
         :lat-lng="heatmapPoints"
         :blur="heatmapConfig.blur"
         :radius="heatmapConfig.radius"
-        :min-opacity="0.3"
       />
     </l-map>
   </div>

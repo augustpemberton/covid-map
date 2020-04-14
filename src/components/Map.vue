@@ -63,8 +63,8 @@ export default {
           '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       },
       heatmapConfig: {
-        radius: 40,
-        blur: 23,
+        radius: 20,
+        blur: 13,
       }
     }
   },

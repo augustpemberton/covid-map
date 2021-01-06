@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@esri/arcgis-rest-request": "^2.11.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "core-js": "2",
     "google-maps": "^4.2.3",
     "heatmap.js": "^2.0.5",
